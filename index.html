@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saher Marzouk | Portfolio</title>
+  <style>
+    :root{
+      --accent1: 200 100% 55%;
+      --accent2: 135 90% 55%;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+      background:#050814;
+      color:#f5f7ff;
+      min-height:100vh;
+    }
+    body.light{
+      background:#f5f7ff;
+      color:#050814;
+    }
+    a{text-decoration:none;color:inherit;}
+    .container{max-width:1100px;margin:0 auto;padding:16px;}
+
+    .nav{
+      position:sticky;top:0;z-index:20;
+      backdrop-filter:blur(10px);
+      background:rgba(5,8,20,0.9);
+      border-bottom:1px solid rgba(255,255,255,0.1);
+    }
+    body.light .nav{
+      background:rgba(245,247,255,0.9);
+      border-bottom:1px solid rgba(0,0,0,0.06);
+    }
+    .nav-inner{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:12px;padding:10px 0;
+    }
+    .brand{
+      font-weight:800;font-size:15px;
+      background:linear-gradient(90deg,hsl(var(--accent1)),hsl(var(--accent2)));
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+      white-space:nowrap;
+    }
+    .nav-links{display:none;gap:8px;flex-wrap:wrap;}
+    .nav-links a{
+      font-size:13px;padding:6px 11px;border-radius:999px;
+      transition:0.2s;
+    }
+    .nav-links a:hover{
+      box-shadow:0 0 0 3px rgba(126,210,255,0.35),
+                 0 0 18px rgba(90,255,180,0.25);
+    }
+    .nav-actions{display:flex;gap:8px;align-items:center;}
+    .chip-small{
+      display:flex;align-items:center;gap:8px;
+      padding:5px 8px;border-radius:999px;
+      border:1px solid rgba(255,255,255,0.18);
+      font-size:11px;
+    }
+    .toggle{
+      width:40px;height:20px;border-radius:999px;
+      border:1px solid rgba(255,255,255,0.25);
+      background:rgba(255,255,255,0.1);
+      position:relative;cursor:pointer;
+    }
+    body.light .toggle{
+      border-color:rgba(0,0,0,0.15);
+      background:rgba(0,0,0,0.06);
+    }
+    .toggle-dot{
+      width:16px;height:16px;border-radius:50%;
+      background:#ffffff;
+      position:absolute;top:50%;left:3px;
+      transform:translateY(-50%);
+      transition:0.2s;
+    }
+    body.light .toggle-dot{
+      left:21px;background:#050814;
+    }
+    .btn{
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.18);
+      background:rgba(255,255,255,0.06);
+      padding:8px 14px;
+      font-size:13px;font-weight:600;
+      cursor:pointer;color:inherit;
+      display:inline-flex;align-items:center;gap:6px;
+      transition:0.2s;
+    }
+    .btn:hover{
+      transform:translateY(-1px);
+      box-shadow:0 0 0 3px rgba(126,210,255,0.35),
+                 0 0 18px rgba(90,255,180,0.25);
+    }
+    .btn:active{transform:translateY(0);}
+    .btn-primary{
+      border:none;
+      background:linear-gradient(90deg,hsl(var(--accent1)),hsl(var(--accent2)));
+      color:#021018;
+    }
+
+    .hero{
+      padding:26px 0 12px;
+      display:grid;
+      grid-template-columns:1.3fr 0.9fr;
+      gap:20px;
+      align-items:flex-start;
+    }
+    .chip{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:6px 10px;border-radius:999px;
+      border:1px solid rgba(255,255,255,0.18);
+      background:rgba(255,255,255,0.04);
+      font-size:12px;color:rgba(230,236,255,0.8);
+    }
+    .chip-dot{
+      width:8px;height:8px;border-radius:999px;
+      background:hsl(var(--accent2));
+      box-shadow:0 0 12px rgba(90,255,180,0.7);
+    }
+    h1{
+      margin:14px 0 6px;
+      font-size:36px;line-height:1.1;
+      background:linear-gradient(90deg,hsl(var(--accent1)),hsl(var(--accent2)));
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+    }
+    .subtitle{margin-top:10px;font-size:14px;line-height:1.7;
+      color:rgba(230,236,255,0.8);}
+    body.light .subtitle{color:rgba(20,28,48,0.78);}
+    .cta{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px;}
+
+    .card{
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,0.16);
+      background:rgba(10,16,32,0.8);
+      box-shadow:0 18px 40px rgba(0,0,0,0.5);
+    }
+    body.light .card{
+      background:#ffffff;
+      border-color:rgba(0,0,0,0.08);
+      box-shadow:0 18px 40px rgba(5,10,30,0.15);
+    }
+    .card-inner{padding:16px;}
+
+    .social{margin-top:14px;display:flex;flex-wrap:wrap;gap:10px;}
+    .social a{
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.18);
+      padding:8px 12px;
+      font-size:13px;
+      display:inline-flex;align-items:center;gap:8px;
+      background:rgba(255,255,255,0.03);
+      transition:0.2s;
+    }
+    .social a:hover{
+      transform:translateY(-1px);
+      box-shadow:0 0 0 3px rgba(126,210,255,0.35),
+                 0 0 18px rgba(90,255,180,0.25);
+    }
+
+    .profile-photo-wrap{
+      display:flex;flex-direction:column;align-items:center;gap:10px;
+      margin-bottom:14px;
+    }
+    .profile-photo{
+  width:220px;        /* كانت 170 */
+  height:220px;       /* كانت 170 */
+  border-radius:50%;
+  overflow:hidden;
+  border:3px solid rgba(255,255,255,0.8);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,0.06);
+  font-size:52px;
+  font-weight:700;
+  color:rgba(240,244,255,0.9);
+  box-shadow:0 0 0 4px rgba(126,210,255,0.35),
+             0 0 26px rgba(90,255,180,0.5);
+}
+    body.light .profile-photo{
+      background:rgba(0,0,0,0.04);
+      color:#050814;
+    }
+    .profile-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;          /* يملأ الدايرة */
+  object-position: top center; /* يرفع الصورة شوية لتحت فيبان راسك كويس */
+  display:none;
+}
+    section{padding:18px 0;scroll-margin-top:80px;}
+    .section-title{
+      display:flex;align-items:center;gap:8px;
+      font-size:18px;font-weight:800;margin-bottom:10px;
+    }
+    .section-icon{
+      width:32px;height:32px;border-radius:12px;
+      display:grid;place-items:center;
+      border:1px solid rgba(255,255,255,0.18);
+      background:rgba(255,255,255,0.06);
+      font-size:16px;
+    }
+    .muted{font-size:14px;line-height:1.7;color:rgba(230,236,255,0.8);}
+    body.light .muted{color:rgba(20,28,48,0.8);}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+    .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+    .tag{
+      display:inline-flex;
+      padding:5px 9px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.18);
+      background:rgba(255,255,255,0.05);
+      font-size:11px;
+      margin:3px 6px 0 0;
+    }
+    .search,.field{
+      width:100%;padding:9px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.18);
+      background:rgba(255,255,255,0.04);
+      color:inherit;
+      outline:none;
+      font-size:13px;
+    }
+    body.light .search,body.light .field{
+      background:rgba(255,255,255,0.9);
+      border-color:rgba(0,0,0,0.12);
+    }
+    .search:focus,.field:focus{
+      box-shadow:0 0 0 3px rgba(126,210,255,0.35),
+                 0 0 18px rgba(90,255,180,0.25);
+    }
+    textarea.field{min-height:100px;resize:vertical;}
+
+    footer{
+      text-align:center;
+      padding:20px 0 40px;
+      font-size:12px;
+      color:rgba(230,236,255,0.75);
+    }
+    body.light footer{color:rgba(20,28,48,0.75);}
+
+    .rtl main,.rtl .nav-inner{direction:rtl;}
+    .rtl .nav-inner{flex-direction:row-reverse;}
+    .rtl .nav-links{justify-content:flex-end;}
+    .rtl .section-title{flex-direction:row-reverse;}
+    .rtl .tag{margin:3px 0 0 6px;}
+
+    #adminView{display:none;}
+    .admin-box{max-width:900px;margin:24px auto;padding:16px;}
+    .admin-card{
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,0.18);
+      background:#050814;
+      box-shadow:0 18px 40px rgba(0,0,0,0.7);
+      padding:16px;
+      color:#f5f7ff;
+    }
+    body.light .admin-card{
+      background:#f5f7ff;
+      color:#050814;
+      border-color:rgba(0,0,0,0.12);
+      box-shadow:0 18px 40px rgba(5,10,30,0.2);
+    }
+    .admin-card h2{margin-bottom:8px;font-size:18px;}
+    .admin-card p{margin-bottom:10px;font-size:13px;}
+    .admin-label{font-size:12px;margin-top:8px;margin-bottom:2px;display:block;}
+    .admin-row{display:flex;gap:8px;flex-wrap:wrap;}
+    .admin-row .field{flex:1;}
+    .panel-buttons{
+      margin-top:12px;
+      display:flex;gap:8px;
+      justify-content:flex-end;flex-wrap:wrap;
+    }
+    .error{color:#ff8a8a;font-size:12px;margin-top:4px;}
+    @media (min-width:900px){
+      .nav-links{display:flex;}
+    }
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr;}
+      h1{font-size:30px;}
+      .grid-3,.grid-2{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+  <!-- ======== PROFILE (للناس العادية) ======== -->
+  <div id="profileView">
+    <header class="nav">
+      <div class="container nav-inner">
+        <div class="brand" id="brandName">Saher</div>
+        <nav class="nav-links">
+          <a href="#about" id="navAbout">About</a>
+          <a href="#skills" id="navSkills">Skills</a>
+          <a href="#projects" id="navProjects">Projects</a>
+          <a href="#certificates" id="navCertificates">Certificates</a>
+          <a href="#contact" id="navContact">Contact</a>
+        </nav>
+        <div class="nav-actions">
+          <div class="chip-small">
+            <span id="themeLabel">Dark</span>
+            <div class="toggle" id="themeToggle">
+              <div class="toggle-dot"></div>
+            </div>
+          </div>
+          <button class="btn" id="langToggleBtn">العربية</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <div>
+          <div class="chip">
+            <span class="chip-dot"></span>
+            <span id="titleText">Telecommunications and Networks Engineer</span>
+          </div>
+          <h1 id="nameText">Saher Ehab Ahmed Marzouk</h1>
+          <div class="subtitle" id="aboutLines"></div>
+          <div class="cta">
+            <a class="btn btn-primary" id="cvBtn" href="#" target="_blank" rel="noreferrer">
+              ⬇ <span id="ctaPrimary">Download CV</span>
+            </a>
+            <a class="btn" href="#contact">
+              ☎ <span id="ctaSecondary">Contact Me</span>
+            </a>
+          </div>
+          <div class="social">
+            <a id="emailLink" href="#">
+              ✉ <span id="emailText"></span>
+            </a>
+            <a id="linkedinLink" href="#" target="_blank">in LinkedIn</a>
+            <a id="githubLink" href="#" target="_blank">&lt;/&gt; GitHub</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-inner">
+            <div class="profile-photo-wrap">
+              <div class="profile-photo">
+                <img id="profilePhoto" alt="Profile photo" />
+                <span id="profileInitials">SM</span>
+              </div>
+            </div>
+            <div class="section-title" style="margin-bottom:8px;">
+              <div class="section-icon">⚡</div>
+              <span id="quickTitle">Quick Info</span>
+            </div>
+            <div class="muted" style="font-size:13px;display:grid;gap:6px;">
+              <div><strong>Email:</strong> <a id="email2" href="#"></a></div>
+              <div><strong>Phone:</strong> <span id="phoneText"></span></div>
+              <div><strong>LinkedIn:</strong> <a id="linkedin2" href="#" target="_blank">Open</a></div>
+              <div><strong>GitHub:</strong> <a id="github2" href="#" target="_blank">Open</a></div>
+              <div style="border-top:1px solid rgba(255,255,255,0.15);margin-top:8px;padding-top:6px;">
+                <span id="qrText">Tip: Add a QR on your business card that opens this page.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about">
+        <div class="section-title">
+          <div class="section-icon">🛰</div>
+          <span id="aboutHeading">About</span>
+        </div>
+        <div class="card">
+          <div class="card-inner muted" id="aboutCard"></div>
+        </div>
+      </section>
+
+      <section id="skills">
+        <div class="section-title">
+          <div class="section-icon">🛡</div>
+          <span id="skillsHeading">Skills</span>
+        </div>
+        <div class="grid-3" id="skillsGrid"></div>
+        <div id="skillTags" style="margin-top:8px;"></div>
+      </section>
+
+      <section id="projects">
+        <div class="section-title">
+          <div class="section-icon">💼</div>
+          <span id="projectsHeading">Projects</span>
+        </div>
+        <input id="projectSearch" class="search" type="text" placeholder="Search..." />
+        <div class="grid-2" id="projectsGrid" style="margin-top:10px;"></div>
+        <div class="muted" id="noProjects" style="display:none;margin-top:8px;">No projects match your search.</div>
+        <div id="projectsPdfBtn" style="margin-top:10px;"></div>
+      </section>
+
+      <section id="certificates">
+        <div class="section-title">
+          <div class="section-icon">🏅</div>
+          <span id="certHeading">Certificates</span>
+        </div>
+        <div class="grid-2" id="certGrid"></div>
+        <div id="certsPdfBtn" style="margin-top:10px;"></div>
+      </section>
+
+      <section id="contact">
+        <div class="section-title">
+          <div class="section-icon">✉</div>
+          <span id="contactHeading">Contact</span>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-inner">
+              <div style="font-weight:800;margin-bottom:6px;" id="contactTitle">Send a quick message</div>
+              <div class="muted" style="font-size:13px;margin-bottom:8px;" id="contactHint">
+                This form is a template. You can connect it later (EmailJS, Formspree, etc.).
+              </div>
+              <input class="field" placeholder="Your Name" />
+              <div style="height:6px;"></div>
+              <input class="field" placeholder="Your Email" />
+              <div style="height:6px;"></div>
+              <textarea class="field" placeholder="Message"></textarea>
+              <button class="btn" style="width:100%;margin-top:8px;" disabled id="sendBtn">Send Message</button>
+              <div class="muted" style="font-size:12px;margin-top:6px;" id="contactDisabled">
+                (Disabled by default) Connect it when you deploy.
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-inner">
+              <div style="font-weight:800;margin-bottom:6px;" id="directTitle">Direct contact</div>
+              <div class="muted" style="margin-bottom:10px;" id="directEmail"></div>
+              <div style="display:flex;flex-wrap:wrap;gap:8px;">
+                <button class="btn" id="copyBtn">Copy</button>
+                <a class="btn btn-primary" id="mailBtn" href="#">Email</a>
+                <a class="btn" id="lnBtn" href="#" target="_blank">LinkedIn</a>
+                <a class="btn" id="ghBtn" href="#" target="_blank">GitHub</a>
+              </div>
+              <div class="muted" style="font-size:12px;margin-top:12px;" id="deployTip">
+                Tip: After you upload this file, you can generate a QR for the URL.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        © <span id="year"></span> <span id="footerName">Saher</span>. Single-file portfolio.
+      </footer>
+    </main>
+  </div>
+
+  <!-- ======== ADMIN (لما تكتب ?admin) ======== -->
+  <div id="adminView">
+    <div class="admin-box">
+      <div class="admin-card">
+        <div id="adminLoginPanel">
+          <h2>Admin login</h2>
+          <p>اكتب اليوزر والباسورد عشان تعدّل البروفايل.</p>
+          <label class="admin-label">Username</label>
+          <input class="field" id="adminUser" />
+          <label class="admin-label">Password</label>
+          <input class="field" id="adminPass" type="password" />
+          <div class="error" id="adminLoginError"></div>
+          <div class="panel-buttons">
+            <button class="btn btn-primary" id="adminLoginBtn">Login</button>
+          </div>
+        </div>
+
+        <div id="adminFormPanel" style="display:none;">
+          <h2>Admin panel</h2>
+          <p>عدّل بيانات البروفايل بالعربي والإنجليزي + اللينكات والـ PDF والصورة.</p>
+
+          <div class="admin-row">
+            <div>
+              <label class="admin-label">Full name (EN)</label>
+              <input class="field" id="adminNameEn" />
+            </div>
+            <div>
+              <label class="admin-label">Full name (AR)</label>
+              <input class="field" id="adminNameAr" />
+            </div>
+          </div>
+
+          <div class="admin-row">
+            <div>
+              <label class="admin-label">Title (EN)</label>
+              <input class="field" id="adminTitleEn" />
+            </div>
+            <div>
+              <label class="admin-label">Title (AR)</label>
+              <input class="field" id="adminTitleAr" />
+            </div>
+          </div>
+
+          <label class="admin-label">About (EN) – كل سطر فقرة</label>
+          <textarea class="field" id="adminAboutEn"></textarea>
+
+          <label class="admin-label">About (AR) – كل سطر فقرة</label>
+          <textarea class="field" id="adminAboutAr"></textarea>
+
+          <label class="admin-label">Email</label>
+          <input class="field" id="adminEmail" />
+
+          <label class="admin-label">Phone</label>
+          <input class="field" id="adminPhone" />
+
+          <label class="admin-label">LinkedIn URL</label>
+          <input class="field" id="adminLinkedin" />
+
+          <label class="admin-label">GitHub URL</label>
+          <input class="field" id="adminGithub" />
+
+          <label class="admin-label">CV PDF (مثال: ./Saher_CV.pdf)</label>
+          <input class="field" id="adminCv" />
+
+          <label class="admin-label">Projects PDF (اختياري)</label>
+          <input class="field" id="adminProjectsPdf" />
+
+          <label class="admin-label">Certificates PDF (اختياري)</label>
+          <input class="field" id="adminCertsPdf" />
+
+          <label class="admin-label">Profile photo – اختر صورة من الجهاز</label>
+          <input class="field" id="adminPhotoFile" type="file" accept="image/*" />
+
+          <label class="admin-label">Projects (EN) – كل سطر: Title | short description</label>
+          <textarea class="field" id="adminProjectsEn"></textarea>
+
+          <label class="admin-label">Projects (AR) – كل سطر: العنوان | وصف مختصر</label>
+          <textarea class="field" id="adminProjectsAr"></textarea>
+
+          <label class="admin-label">Certificates (EN) – كل سطر: Name | Issuer | Year</label>
+          <textarea class="field" id="adminCertsEn"></textarea>
+
+          <label class="admin-label">Certificates (AR) – كل سطر: الاسم | الجهة | السنة</label>
+          <textarea class="field" id="adminCertsAr"></textarea>
+
+          <div class="panel-buttons">
+            <button class="btn btn-primary" id="adminApplyBtn">Apply changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var ADMIN_USER = 'saher';
+    var ADMIN_PASS = '1234';
+
+    var profile = {
+      links: {
+        email: 'sahermarzouk655@gmail.com',
+        phone: '',
+        linkedin: 'https://www.linkedin.com/in/%D8%B3%D8%A7%D9%87%D8%B1-%D8%A3%D9%8A%D9%87%D8%A7%D8%A8-58a43a270/?locale=en-US',
+        github: 'https://github.com/',
+        cv: '#',
+        projectsPdf: '#',
+        certsPdf: '#'
+      },
+      photoData: '',
+      texts: {
+        en: {
+          name: 'Saher Ehab Ahmed Marzouk',
+          title: 'Telecommunications and Networks Engineer',
+          about: [
+            'Telecommunications and Networks Engineer, interested in networking and cybersecurity with a continuous drive to develop technical skills.',
+            'Skilled in programming and familiar with security fundamentals and penetration testing, with knowledge of CEH.',
+            'Seeking an internship or entry-level opportunity to gain hands-on experience and contribute to real-world projects within a team.'
+          ],
+          sections: {about:'About',skills:'Skills',projects:'Projects',certificates:'Certificates',contact:'Contact'},
+          cta: {primary:'Download CV',secondary:'Contact Me'},
+          labels: {
+            search:'Search...',
+            noProjects:'No projects match your search.',
+            quick:'Quick Info',
+            qr:'Tip: Add a QR on your business card that opens this page.',
+            contactTitle:'Send a quick message',
+            contactHint:'This form is a template. You can connect it later (EmailJS, Formspree, etc.).',
+            disabled:'(Disabled by default) Connect it when you deploy.',
+            direct:'Direct contact',
+            tip:'Tip: After you upload this file, you can generate a QR for the URL.',
+            copy:'Copy',
+            copied:'Copied',
+            emailBtn:'Email'
+          },
+          skills: [
+            {name:'Networking',icon:'🧠'},
+            {name:'Cybersecurity',icon:'🛡'},
+            {name:'Programming',icon:'💻'}
+          ],
+          skillTags: [
+            'Routing & Switching','TCP/IP','Subnetting','LAN/WAN','OSI Model',
+            'Troubleshooting','Linux Basics','Security Fundamentals',
+            'Penetration Testing Basics','CEH Knowledge','Python','C/C++'
+          ],
+          projectsText:
+'Networking Lab Project | Designed and configured a small lab network with routing, VLANs, and basic security rules.\n'+
+'Security Mini Project | Practiced basic penetration testing techniques in a safe environment using open-source tools.',
+          certsText:
+'Example Certificate (e.g., CCNA, CEH, Coursera) | Issuer / Platform | 2025'
+        },
+        ar: {
+          name: 'ساهر إيهاب أحمد مرزوق',
+          title: 'مهندس اتصالات وشبكات',
+          about: [
+            'مهندس اتصالات وشبكات مهتم بمجال الشبكات والأمن السيبراني ولديه شغف دائم بتطوير المهارات التقنية.',
+            'لدي مهارات برمجية ومعرفة بأساسيات الأمن واختبار الاختراق مع إلمام بمحتوى CEH.',
+            'أبحث عن تدريب أو فرصة مبتدئة لاكتساب خبرة عملية والمساهمة في مشاريع حقيقية ضمن فريق.'
+          ],
+          sections: {about:'نبذة',skills:'المهارات',projects:'المشاريع',certificates:'الشهادات',contact:'تواصل'},
+          cta: {primary:'تحميل السيرة الذاتية',secondary:'تواصل معي'},
+          labels: {
+            search:'بحث...',
+            noProjects:'لا توجد مشاريع مطابقة للبحث.',
+            quick:'معلومات سريعة',
+            qr:'ضع QR على الكارت ليفتح هذه الصفحة.',
+            contactTitle:'أرسل رسالة',
+            contactHint:'هذا نموذج فقط ويمكن ربطه لاحقًا (EmailJS أو Formspree...).',
+            disabled:'(غير مفعّل افتراضيًا) فعّله بعد رفع الموقع.',
+            direct:'تواصل مباشر',
+            tip:'نصيحة: بعد رفع الموقع ضع الرابط في QR.',
+            copy:'نسخ',
+            copied:'تم النسخ',
+            emailBtn:'إيميل'
+          },
+          skills: [
+            {name:'الشبكات',icon:'🧠'},
+            {name:'الأمن السيبراني',icon:'🛡'},
+            {name:'البرمجة',icon:'💻'}
+          ],
+          skillTags: [
+            'Routing & Switching','TCP/IP','Subnetting','LAN/WAN','OSI Model',
+            'Troubleshooting','Linux Basics','Security Fundamentals',
+            'Penetration Testing Basics','CEH Knowledge','Python','C/C++'
+          ],
+          projectsText:
+'مشروع معمل شبكات | تصميم وتهيئة شبكة صغيرة مع Routing و VLANs وبعض قواعد الحماية.\n'+
+'مشروع بسيط في الأمن | تطبيق أساسيات اختبار الاختراق في بيئة آمنة باستخدام أدوات مفتوحة المصدر.',
+          certsText:
+'مثال شهادة (مثل CCNA أو CEH أو كورس) | الجهة / المنصة | 2025'
+        }
+      }
+    };
+
+    var state = {lang:'en',theme:'dark'};
+
+    function $(id){return document.getElementById(id);}
+
+    function parseProjects(text){
+      var lines = text.split('\n');
+      var out = [];
+      for(var i=0;i<lines.length;i++){
+        var line = lines[i].trim();
+        if(!line) continue;
+        var parts = line.split('|');
+        var title = parts[0] ? parts[0].trim() : '';
+        var desc = parts[1] ? parts[1].trim() : '';
+        out.push({title:title,desc:desc});
+      }
+      return out;
+    }
+
+    function parseCerts(text){
+      var lines = text.split('\n');
+      var out = [];
+      for(var i=0;i<lines.length;i++){
+        var line = lines[i].trim();
+        if(!line) continue;
+        var parts = line.split('|');
+        var name = parts[0] ? parts[0].trim() : '';
+        var issuer = parts[1] ? parts[1].trim() : '';
+        var year = parts[2] ? parts[2].trim() : '';
+        out.push({name:name,issuer:issuer,year:year});
+      }
+      return out;
+    }
+
+    function renderProjects(){
+      var T = profile.texts[state.lang];
+      var q = $('projectSearch').value.toLowerCase().trim();
+      var all = parseProjects(T.projectsText);
+      var list = [];
+      for(var i=0;i<all.length;i++){
+        var blob = (all[i].title+' '+all[i].desc).toLowerCase();
+        if(blob.indexOf(q)!==-1){list.push(all[i]);}
+      }
+      var html = '';
+      for(var j=0;j<list.length;j++){
+        html += '<div class="card"><div class="card-inner">'+
+          '<div style="font-weight:800;font-size:15px;margin-bottom:4px;">'+list[j].title+'</div>'+
+          '<div class="muted" style="font-size:13px;">'+list[j].desc+'</div>'+
+          '</div></div>';
+      }
+      $('projectsGrid').innerHTML = html;
+      $('noProjects').style.display = list.length ? 'none' : 'block';
+    }
+
+    function renderCerts(){
+      var T = profile.texts[state.lang];
+      var all = parseCerts(T.certsText);
+      var html = '';
+      for(var i=0;i<all.length;i++){
+        html += '<div class="card"><div class="card-inner">'+
+          '<div style="font-weight:800;font-size:14px;margin-bottom:4px;">'+all[i].name+'</div>'+
+          '<div class="muted" style="font-size:13px;">'+all[i].issuer+'</div>'+
+          '<div class="muted" style="font-size:12px;margin-top:4px;">'+all[i].year+'</div>'+
+          '</div></div>';
+      }
+      $('certGrid').innerHTML = html;
+    }
+
+    function renderProfile(){
+      var T = profile.texts[state.lang];
+
+      if(state.lang === 'ar'){
+        document.documentElement.lang = 'ar';
+        document.documentElement.dir = 'rtl';
+        document.body.classList.add('rtl');
+        $('langToggleBtn').textContent = 'English';
+      } else {
+        document.documentElement.lang = 'en';
+        document.documentElement.dir = 'ltr';
+        document.body.classList.remove('rtl');
+        $('langToggleBtn').textContent = 'العربية';
+      }
+
+      document.body.classList.toggle('light', state.theme === 'light');
+      $('themeLabel').textContent = state.theme === 'dark'
+        ? (state.lang==='en'?'Dark':'داكن')
+        : (state.lang==='en'?'Light':'فاتح');
+
+      $('brandName').textContent = T.name;
+      $('footerName').textContent = T.name;
+      $('titleText').textContent = T.title;
+      $('nameText').textContent = T.name;
+
+      var aboutHtml = '';
+      for(var i=0;i<T.about.length;i++){
+        aboutHtml += '<div>'+T.about[i]+'</div>';
+      }
+      $('aboutLines').innerHTML = aboutHtml;
+      $('aboutCard').innerHTML = aboutHtml;
+
+      $('aboutHeading').textContent = T.sections.about;
+      $('skillsHeading').textContent = T.sections.skills;
+      $('projectsHeading').textContent = T.sections.projects;
+      $('certHeading').textContent = T.sections.certificates;
+      $('contactHeading').textContent = T.sections.contact;
+
+      $('navAbout').textContent = T.sections.about;
+      $('navSkills').textContent = T.sections.skills;
+      $('navProjects').textContent = T.sections.projects;
+      $('navCertificates').textContent = T.sections.certificates;
+      $('navContact').textContent = T.sections.contact;
+
+      $('ctaPrimary').textContent = T.cta.primary;
+      $('ctaSecondary').textContent = T.cta.secondary;
+
+      $('emailText').textContent = profile.links.email;
+      $('emailLink').href = 'mailto:'+profile.links.email;
+      $('email2').textContent = profile.links.email;
+      $('email2').href = 'mailto:'+profile.links.email;
+      $('directEmail').textContent = profile.links.email;
+      $('mailBtn').href = 'mailto:'+profile.links.email;
+
+      $('phoneText').textContent = profile.links.phone || '';
+      $('linkedinLink').href = profile.links.linkedin;
+      $('linkedin2').href = profile.links.linkedin;
+      $('lnBtn').href = profile.links.linkedin;
+      $('githubLink').href = profile.links.github;
+      $('github2').href = profile.links.github;
+      $('ghBtn').href = profile.links.github;
+
+      if(profile.links.cv && profile.links.cv !== '#'){
+        $('cvBtn').href = profile.links.cv;
+        $('cvBtn').style.opacity = '1';
+        $('cvBtn').style.pointerEvents = 'auto';
+      } else {
+        $('cvBtn').href = '#';
+        $('cvBtn').style.opacity = '0.5';
+        $('cvBtn').style.pointerEvents = 'none';
+      }
+
+      $('projectSearch').placeholder = T.labels.search;
+      $('noProjects').textContent = T.labels.noProjects;
+      $('quickTitle').textContent = T.labels.quick;
+      $('qrText').textContent = T.labels.qr;
+      $('contactTitle').textContent = T.labels.contactTitle;
+      $('contactHint').textContent = T.labels.contactHint;
+      $('contactDisabled').textContent = T.labels.disabled;
+      $('directTitle').textContent = T.labels.direct;
+      $('deployTip').textContent = T.labels.tip;
+      $('copyBtn').textContent = T.labels.copy;
+      $('sendBtn').textContent = state.lang==='en' ? 'Send Message' : 'إرسال';
+
+      var img = $('profilePhoto');
+      var initials = $('profileInitials');
+      if(profile.photoData){
+        img.src = profile.photoData;
+        img.style.display = 'block';
+        initials.style.display = 'none';
+      } else {
+        img.style.display = 'none';
+        var parts = T.name.split(' ');
+        var init = '';
+        for(var j=0;j<parts.length && init.length<2;j++){
+          if(parts[j].length){init += parts[j].charAt(0);}
+        }
+        initials.textContent = init.toUpperCase();
+        initials.style.display = 'block';
+      }
+
+      var skillsHtml = '';
+      for(var s=0;s<T.skills.length;s++){
+        skillsHtml += '<div class="card"><div class="card-inner">'+
+          '<div style="display:flex;align-items:center;gap:8px;">'+
+          '<div class="section-icon">'+T.skills[s].icon+'</div>'+
+          '<div style="font-weight:700;font-size:14px;">'+T.skills[s].name+'</div>'+
+          '</div></div></div>';
+      }
+      $('skillsGrid').innerHTML = skillsHtml;
+
+      var tagsHtml = '';
+      for(var t=0;t<T.skillTags.length;t++){
+        tagsHtml += '<span class="tag">'+T.skillTags[t]+'</span>';
+      }
+      $('skillTags').innerHTML = tagsHtml;
+
+      renderProjects();
+      renderCerts();
+
+      var projPdf = profile.links.projectsPdf;
+      if(projPdf && projPdf !== '#'){
+        $('projectsPdfBtn').innerHTML = '<a class="btn" href="'+projPdf+'" target="_blank">Download projects PDF</a>';
+      } else {
+        $('projectsPdfBtn').innerHTML = '';
+      }
+
+      var certPdf = profile.links.certsPdf;
+      if(certPdf && certPdf !== '#'){
+        $('certsPdfBtn').innerHTML = '<a class="btn" href="'+certPdf+'" target="_blank">Download certificates PDF</a>';
+      } else {
+        $('certsPdfBtn').innerHTML = '';
+      }
+    }
+
+    function fillAdminForm(){
+      var en = profile.texts.en;
+      var ar = profile.texts.ar;
+      $('adminNameEn').value = en.name;
+      $('adminNameAr').value = ar.name;
+      $('adminTitleEn').value = en.title;
+      $('adminTitleAr').value = ar.title;
+      $('adminAboutEn').value = en.about.join('\n');
+      $('adminAboutAr').value = ar.about.join('\n');
+      $('adminEmail').value = profile.links.email;
+      $('adminPhone').value = profile.links.phone;
+      $('adminLinkedin').value = profile.links.linkedin;
+      $('adminGithub').value = profile.links.github;
+      $('adminCv').value = profile.links.cv;
+      $('adminProjectsPdf').value = profile.links.projectsPdf || '';
+      $('adminCertsPdf').value = profile.links.certsPdf || '';
+      $('adminProjectsEn').value = en.projectsText;
+      $('adminProjectsAr').value = ar.projectsText;
+      $('adminCertsEn').value = en.certsText;
+      $('adminCertsAr').value = ar.certsText;
+    }
+
+    function applyAdminChanges(){
+      var en = profile.texts.en;
+      var ar = profile.texts.ar;
+      var v;
+
+      v = $('adminNameEn').value.trim(); if(v) en.name = v;
+      v = $('adminNameAr').value.trim(); if(v) ar.name = v;
+      v = $('adminTitleEn').value.trim(); if(v) en.title = v;
+      v = $('adminTitleAr').value.trim(); if(v) ar.title = v;
+
+      var arrEn = $('adminAboutEn').value.split('\n');
+      var newEnAbout = [];
+      for(var i=0;i<arrEn.length;i++){
+        var line = arrEn[i].trim();
+        if(line) newEnAbout.push(line);
+      }
+      if(newEnAbout.length){en.about = newEnAbout;}
+
+      var arrAr = $('adminAboutAr').value.split('\n');
+      var newArAbout = [];
+      for(var j=0;j<arrAr.length;j++){
+        var line2 = arrAr[j].trim();
+        if(line2) newArAbout.push(line2);
+      }
+      if(newArAbout.length){ar.about = newArAbout;}
+
+      v = $('adminEmail').value.trim(); if(v) profile.links.email = v;
+      v = $('adminPhone').value.trim(); if(v) profile.links.phone = v;
+      v = $('adminLinkedin').value.trim(); if(v) profile.links.linkedin = v;
+      v = $('adminGithub').value.trim(); if(v) profile.links.github = v;
+      v = $('adminCv').value.trim(); if(v) profile.links.cv = v;
+      v = $('adminProjectsPdf').value.trim(); if(v) profile.links.projectsPdf = v;
+      v = $('adminCertsPdf').value.trim(); if(v) profile.links.certsPdf = v;
+
+      v = $('adminProjectsEn').value; if(v) en.projectsText = v;
+      v = $('adminProjectsAr').value; if(v) ar.projectsText = v;
+      v = $('adminCertsEn').value; if(v) en.certsText = v;
+      v = $('adminCertsAr').value; if(v) ar.certsText = v;
+
+      saveProfile();
+      renderProfile();
+      alert('تم حفظ التغييرات على هذا الجهاز. لو عدّلت بعد ما ترفع الموقع، التغييرات هتظهر عندك في نفس المتصفح.');
+    }
+
+    function handleLogin(){
+      var u = $('adminUser').value.trim();
+      var p = $('adminPass').value.trim();
+      var err = $('adminLoginError');
+      if(u === ADMIN_USER && p === ADMIN_PASS){
+        if(err) err.textContent = '';
+        $('adminLoginPanel').style.display = 'none';
+        $('adminFormPanel').style.display = 'block';
+        fillAdminForm();
+      } else {
+        if(err) err.textContent = 'Wrong username or password.';
+      }
+    }
+
+    function setupProfileEvents(){
+      $('langToggleBtn').onclick = function(){
+        state.lang = state.lang==='en' ? 'ar' : 'en';
+        renderProfile();
+      };
+      $('themeToggle').onclick = function(){
+        state.theme = state.theme==='dark' ? 'light' : 'dark';
+        renderProfile();
+      };
+      $('projectSearch').addEventListener('input', renderProjects);
+      $('copyBtn').onclick = function(){
+        var T = profile.texts[state.lang];
+        if(navigator.clipboard && profile.links.email){
+          navigator.clipboard.writeText(profile.links.email).then(function(){
+            $('copyBtn').textContent = T.labels.copied;
+            setTimeout(function(){
+              $('copyBtn').textContent = T.labels.copy;
+            },1200);
+          });
+        }
+      };
+    }
+
+    function setupAdminEvents(){
+      $('adminLoginBtn').onclick = handleLogin;
+      $('adminPass').addEventListener('keydown', function(e){
+        if(e.key === 'Enter'){handleLogin();}
+      });
+      $('adminApplyBtn').onclick = applyAdminChanges;
+      $('adminPhotoFile').addEventListener('change', function(ev){
+        var file = ev.target.files[0];
+        if(!file) return;
+        if(!file.type || file.type.indexOf('image')!==0) return;
+        var reader = new FileReader();
+        reader.onload = function(e){
+          profile.photoData = e.target.result || '';
+          saveProfile();
+          renderProfile();
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function loadProfile(){
+      try{
+        var saved = localStorage.getItem('saherPortfolioProfile');
+        if(saved){
+          var obj = JSON.parse(saved);
+          if(obj && obj.texts && obj.links){
+            profile = obj;
+          }
+        }
+      }catch(e){}
+    }
+
+    function saveProfile(){
+      try{
+        localStorage.setItem('saherPortfolioProfile', JSON.stringify(profile));
+      }catch(e){}
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+      $('year').textContent = new Date().getFullYear();
+      loadProfile();
+
+      var search = window.location.search.toLowerCase();
+      var hash = window.location.hash.toLowerCase();
+      var isAdmin = (search.indexOf('admin')!==-1 || hash.indexOf('admin')!==-1);
+
+      if(isAdmin){
+        $('profileView').style.display = 'none';
+        $('adminView').style.display = 'block';
+        setupAdminEvents();
+      } else {
+        $('profileView').style.display = 'block';
+        $('adminView').style.display = 'none';
+        setupProfileEvents();
+        renderProfile();
+      }
+    });
+  </script>
+</body>
+</html>
